@@ -1,0 +1,102 @@
+[tool.poetry]
+name = "bolt12"
+version = "0.1.0"
+description = "Bolt12 invoice en- and decoder"
+repository = "https://github.com/lnbits/bolt12"
+authors = ["dni <dni@600.wtf>"]
+license = "MIT"
+readme = "README.md"
+packages = [
+  {include = "bolt12"},
+  {include = "bolt12/py.typed"},
+]
+
+[tool.poetry.scripts]
+bolt12 = "bolt12.cli:main"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+click = "^8.1.7"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+ruff = "^0.0.285"
+pyright = "^1.1.323"
+pre-commit = "^3.3.3"
+mypy = "^1.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+ignore_missing_imports = "True"
+files = "bolt12"
+
+[tool.pytest.ini_options]
+testpaths = [
+  "tests"
+]
+
+[tool.pyright]
+reportMissingImports = false
+include = [
+    "bolt12",
+    "tests",
+]
+
+[tool.black]
+line-length = 88
+
+# previously experimental-string-processing = true
+# this should autoformat string properly but does not work
+preview = true
+
+
+[tool.ruff]
+# Same as Black. but black has a 10% overflow rule
+line-length = 88
+
+# Enable pycodestyle (`E`) and Pyflakes (`F`) codes by default.
+# (`I`) means isorting
+select = ["E", "F", "I"]
+ignore = []
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.8
+# target-version = "py38"
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
