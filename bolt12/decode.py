@@ -1,5 +1,6 @@
 """ Bolt12 decoder """
 
+
 class Bolt12:
     def __init__(self, invoice: str):
         self.invoice = invoice
